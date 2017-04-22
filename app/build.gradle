@@ -26,6 +26,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "PIXABAY_API_KEY", "\"" + file("pixabay_key").text + "\""
     }
     buildTypes {
         release {
@@ -52,6 +53,12 @@ dependencies {
 
     compile 'com.squareup.retrofit2:retrofit:2.2.0'
     compile 'com.squareup.retrofit2:converter-gson:2.2.0'
-    
+
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+
+
     testCompile 'junit:junit:4.12'
+
+    compile 'com.google.android:flexbox:0.3.0-alpha3'
 }

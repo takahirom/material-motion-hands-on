@@ -17,23 +17,26 @@
 package com.github.takahirom.motion_app;
 
 import android.content.Intent;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.test.mock.MockApplication;
 import android.view.View;
-import android.widget.Toast;
 
-import com.github.takahirom.motion_app.datasource.FlickerResponse;
-import com.github.takahirom.motion_app.datasource.FlickerService;
+import com.github.takahirom.motion_app.datasource.PixabayResponse;
+import com.github.takahirom.motion_app.datasource.PixabayService;
+import com.google.android.flexbox.AlignContent;
+import com.google.android.flexbox.AlignItems;
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexWrap;
+import com.google.android.flexbox.FlexboxLayoutManager;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity implements Callback<FlickerResponse> {
+public class MainActivity extends AppCompatActivity implements Callback<PixabayResponse> {
 
     private RecyclerView recyclerView;
 
@@ -43,27 +46,36 @@ public class MainActivity extends AppCompatActivity implements Callback<FlickerR
         setContentView(R.layout.activity_main);
         setupViews();
 
-        final FlickerService flickerService = ((MotionApplication) getApplication()).getFlickerService();
-        flickerService.getPublicPhotos().enqueue(this);
+
+        final PixabayService pixabayService = ((MotionApplication) getApplication()).getPixabayService();
+        pixabayService.getPublicPhotos().enqueue(this);
     }
 
     private void setupViews() {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        final FlexboxLayoutManager layoutManager = new FlexboxLayoutManager();
+        recyclerView.setLayoutManager(layoutManager);
+        layoutManager.setFlexDirection(FlexDirection.ROW);
+        layoutManager.setFlexWrap(FlexWrap.WRAP);
+        layoutManager.setAlignItems(AlignItems.STRETCH);
     }
 
     @Override
-    public void onResponse(Call<FlickerResponse> call, Response<FlickerResponse> response) {
-        final RecyclerAdapter adapter = new RecyclerAdapter(response.body().getItems(), new RecyclerAdapter.OnItemClickListener() {
+    public void onResponse(Call<PixabayResponse> call, Response<PixabayResponse> response) {
+        final RecyclerAdapter adapter = new RecyclerAdapter(response.body().getHits(), new RecyclerAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(View photoView, FlickerResponse.Item item) {
-                startActivity(DetailActivity.getLaunchIntent(MainActivity.this, item));
+            public void onItemClick(View photoView, PixabayResponse.Hit item) {
+                final Intent launchIntent = DetailActivity.getLaunchIntent(MainActivity.this, item);
+                final ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, photoView, getString(R.string.transition_name_photo));
+                ActivityCompat.startActivity(MainActivity.this, launchIntent, optionsCompat.toBundle());
             }
         });
         recyclerView.setAdapter(adapter);
     }
 
     @Override
-    public void onFailure(Call<FlickerResponse> call, Throwable t) {
+    public void onFailure(Call<PixabayResponse> call, Throwable t) {
 
     }
 }

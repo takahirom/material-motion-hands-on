@@ -14,15 +14,9 @@
   ~ limitations under the License.
   -->
 
-<resources>
-
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-    </style>
-    <style name="AppTheme.NoActionBar.Detail">
-        <item name="android:windowEnterTransition">@android:transition/move</item>
-    </style>
-</resources>
+<transitionSet xmlns:android="http://schemas.android.com/apk/res/android">
+    <changeBounds/>
+    <changeTransform/>
+    <changeClipBounds/>
+    <changeImageTransform/>
+</transitionSet>

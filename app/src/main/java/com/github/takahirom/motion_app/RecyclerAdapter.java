@@ -24,15 +24,16 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.github.takahirom.motion_app.datasource.FlickerResponse;
+import com.github.takahirom.motion_app.datasource.PixabayResponse;
+import com.google.android.flexbox.FlexboxLayoutManager;
 
 import java.util.List;
 
 class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
     private OnItemClickListener onItemClickListener;
-    private List<FlickerResponse.Item> items;
+    private List<PixabayResponse.Hit> items;
 
-    RecyclerAdapter(List<FlickerResponse.Item> items, OnItemClickListener onItemClickListener) {
+    RecyclerAdapter(List<PixabayResponse.Hit> items, OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
         this.items = items;
     }
@@ -45,11 +46,17 @@ class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(RecyclerAdapter.ViewHolder holder, final int position) {
+        final float imageScale = holder.itemView.getContext().getResources().getDisplayMetrics().density / 3;
+        final int width = (int) (items.get(position).getWebformatWidth() * imageScale);
+        final int height = (int) (items.get(position).getWebformatHeight() * imageScale);
+
         Glide
                 .with(holder.itemView.getContext())
-                .load(items.get(position).getMedia().getM())
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .load(items.get(position).getWebformatURL().replace("640", "340"))
+                .override(width, height)
                 .into(holder.photoImageView);
+        holder.photoImageView.getLayoutParams().width = width;
+        holder.photoImageView.getLayoutParams().height = height;
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,10 +76,13 @@ class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
         ViewHolder(View itemView) {
             super(itemView);
             photoImageView = (ImageView) itemView.findViewById(R.id.photo);
+            FlexboxLayoutManager.LayoutParams lp = (FlexboxLayoutManager.LayoutParams)
+                    itemView.getLayoutParams();
+            lp.setFlexGrow(1.0f);
         }
     }
 
     interface OnItemClickListener {
-        void onItemClick(View photoView, FlickerResponse.Item item);
+        void onItemClick(View photoView, PixabayResponse.Hit item);
     }
 }

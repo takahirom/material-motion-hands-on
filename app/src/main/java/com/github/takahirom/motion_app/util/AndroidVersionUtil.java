@@ -14,17 +14,20 @@
  * limitations under the License.
  */
 
-package com.github.takahirom.motion_app.datasource;
+package com.github.takahirom.motion_app.util;
 
-import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Url;
+import android.os.Build;
 
-public interface FlickerService {
-    /**
-     * Flicker Public feed API
-     * @see <a href="https://www.flickr.com/services/feeds/docs/photos_public/">Public feed</a>
-     */
-    @GET("/services/feeds/photos_public.gne?format=json&is_commons=1&&nojsoncallback=1&tags=servalcat")
-    public Call<FlickerResponse> getPublicPhotos();
+public class AndroidVersionUtil {
+    public static boolean isGreaterThanKitKat() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+    }
+
+    public static boolean isGreaterThanL() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
+    }
+
+    public static boolean isGreaterThanM() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
+    }
 }

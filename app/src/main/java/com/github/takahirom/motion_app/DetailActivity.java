@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -33,7 +34,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.github.takahirom.motion_app.datasource.FlickerResponse;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
+import com.github.takahirom.motion_app.datasource.PixabayResponse;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -44,22 +48,40 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        final FlickerResponse.Item item = getIntent().getParcelableExtra(EXTRA_ITEM);
+        final PixabayResponse.Hit item = getIntent().getParcelableExtra(EXTRA_ITEM);
 
+        ActivityCompat.postponeEnterTransition(this);
+
+        final float imageScale = getResources().getDisplayMetrics().density / 3;
+        final int width = (int) (item.getWebformatWidth() * imageScale);
+        final int height = (int) (item.getWebformatHeight() * imageScale);
+
+        final ImageView imageView = (ImageView) findViewById(R.id.photo);
         Glide
                 .with(this)
-                .load(item.getMedia().getM())
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .into((ImageView) findViewById(R.id.photo));
+                .load(item.getWebformatURL().replace("640", "340"))
+                .override(width, height)
+                .listener(new RequestListener<String, GlideDrawable>() {
+                    @Override
+                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                        return false;
+                    }
+                    @Override
+                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                        ActivityCompat.startPostponedEnterTransition(DetailActivity.this);
+                        return false;
+                    }
+                })
+                .into(imageView);
 
         final TextView detailText = (TextView) findViewById(R.id.detail_text);
-        detailText.setText(fromHtml(item.getDescription()));
+        detailText.setText(fromHtml(item.getTags()));
 
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbarLayout.setTitle(item.getTitle());
+        collapsingToolbarLayout.setTitleEnabled(false);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +102,7 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
-    public static Intent getLaunchIntent(Context context, FlickerResponse.Item item){
+    public static Intent getLaunchIntent(Context context, PixabayResponse.Hit item){
         final Intent intent = new Intent(context, DetailActivity.class);
         intent.putExtra(EXTRA_ITEM, item);
         return intent;
