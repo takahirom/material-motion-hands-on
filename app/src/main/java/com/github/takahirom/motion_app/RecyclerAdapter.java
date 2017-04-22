@@ -23,11 +23,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.github.takahirom.motion_app.datasource.FlickerResponse;
 
 import java.util.List;
 
-class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder>{
+class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
     private OnItemClickListener onItemClickListener;
     private List<FlickerResponse.Item> items;
 
@@ -44,8 +45,10 @@ class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(RecyclerAdapter.ViewHolder holder, final int position) {
-        Glide.with(holder.itemView.getContext())
+        Glide
+                .with(holder.itemView.getContext())
                 .load(items.get(position).getMedia().getM())
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .into(holder.photoImageView);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +63,7 @@ class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder>{
         return items.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
+    static class ViewHolder extends RecyclerView.ViewHolder {
         final ImageView photoImageView;
 
         ViewHolder(View itemView) {

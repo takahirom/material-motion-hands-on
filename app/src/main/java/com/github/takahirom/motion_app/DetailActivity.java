@@ -32,6 +32,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.github.takahirom.motion_app.datasource.FlickerResponse;
 
 public class DetailActivity extends AppCompatActivity {
@@ -45,7 +46,11 @@ public class DetailActivity extends AppCompatActivity {
 
         final FlickerResponse.Item item = getIntent().getParcelableExtra(EXTRA_ITEM);
 
-        Glide.with(this).load(item.getMedia().getM()).into((ImageView) findViewById(R.id.photo));
+        Glide
+                .with(this)
+                .load(item.getMedia().getM())
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .into((ImageView) findViewById(R.id.photo));
 
         final TextView detailText = (TextView) findViewById(R.id.detail_text);
         detailText.setText(fromHtml(item.getDescription()));
