@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+<!--
   ~ Copyright (C) 2017 takahirom
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,11 +15,8 @@
   ~ limitations under the License.
   -->
 
-<com.github.takahirom.motion_app.ForegroundImageView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/photo"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="1dp"
-    android:foreground="?android:attr/selectableItemBackground"
-    android:scaleType="centerCrop" />
+<resources>
+    <declare-styleable name="ForegroundView">
+        <attr name="android:foreground"/>
+    </declare-styleable>
+</resources>
