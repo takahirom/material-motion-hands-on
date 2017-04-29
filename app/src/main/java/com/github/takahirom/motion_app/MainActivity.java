@@ -17,16 +17,15 @@
 package com.github.takahirom.motion_app;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.github.takahirom.motion_app.datasource.PixabayResponse;
 import com.github.takahirom.motion_app.datasource.PixabayService;
-import com.google.android.flexbox.AlignContent;
 import com.google.android.flexbox.AlignItems;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
@@ -63,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements Callback<PixabayR
 
     @Override
     public void onResponse(Call<PixabayResponse> call, Response<PixabayResponse> response) {
-        final RecyclerAdapter adapter = new RecyclerAdapter(response.body().getHits(), new RecyclerAdapter.OnItemClickListener() {
+        final PhotoAdapter adapter = new PhotoAdapter(response.body().getHits(), new PhotoAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View photoView, PixabayResponse.Hit item) {
                 final Intent launchIntent = DetailActivity.getLaunchIntent(MainActivity.this, item);

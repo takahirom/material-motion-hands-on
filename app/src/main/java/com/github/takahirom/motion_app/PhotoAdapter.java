@@ -23,29 +23,28 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.github.takahirom.motion_app.datasource.PixabayResponse;
 import com.google.android.flexbox.FlexboxLayoutManager;
 
 import java.util.List;
 
-class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
+class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> {
     private OnItemClickListener onItemClickListener;
     private List<PixabayResponse.Hit> items;
 
-    RecyclerAdapter(List<PixabayResponse.Hit> items, OnItemClickListener onItemClickListener) {
+    PhotoAdapter(List<PixabayResponse.Hit> items, OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
         this.items = items;
     }
 
     @Override
-    public RecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public PhotoAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_photo, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(PhotoAdapter.ViewHolder holder, final int position) {
         final float imageScale = holder.itemView.getContext().getResources().getDisplayMetrics().density / 3;
         final int width = (int) (items.get(position).getWebformatWidth() * imageScale);
         final int height = (int) (items.get(position).getWebformatHeight() * imageScale);
@@ -70,6 +69,10 @@ class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
         return items.size();
     }
 
+    interface OnItemClickListener {
+        void onItemClick(View photoView, PixabayResponse.Hit item);
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder {
         final ImageView photoImageView;
 
@@ -80,9 +83,5 @@ class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
                     itemView.getLayoutParams();
             lp.setFlexGrow(1.0f);
         }
-    }
-
-    interface OnItemClickListener {
-        void onItemClick(View photoView, PixabayResponse.Hit item);
     }
 }
