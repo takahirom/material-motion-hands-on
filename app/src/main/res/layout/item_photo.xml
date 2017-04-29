@@ -14,7 +14,7 @@
   ~ limitations under the License.
   -->
 
-<com.github.takahirom.motion_app.ForegroundImageView
+<com.github.takahirom.motion_app.view.ForegroundImageView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/photo"
     android:layout_width="wrap_content"

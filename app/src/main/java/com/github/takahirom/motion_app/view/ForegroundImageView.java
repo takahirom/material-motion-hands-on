@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.takahirom.motion_app;
+package com.github.takahirom.motion_app.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -23,6 +23,8 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.ViewOutlineProvider;
 import android.widget.ImageView;
+
+import com.github.takahirom.motion_app.R;
 
 
 /**

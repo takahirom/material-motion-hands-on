@@ -37,7 +37,7 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements Callback<PixabayResponse> {
 
-    private RecyclerView recyclerView;
+    private PhotoAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,18 +51,15 @@ public class MainActivity extends AppCompatActivity implements Callback<PixabayR
     }
 
     private void setupViews() {
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         final FlexboxLayoutManager layoutManager = new FlexboxLayoutManager();
         recyclerView.setLayoutManager(layoutManager);
         layoutManager.setFlexDirection(FlexDirection.ROW);
         layoutManager.setFlexWrap(FlexWrap.WRAP);
         layoutManager.setAlignItems(AlignItems.STRETCH);
-    }
 
-    @Override
-    public void onResponse(Call<PixabayResponse> call, Response<PixabayResponse> response) {
-        final PhotoAdapter adapter = new PhotoAdapter(response.body().getHits(), new PhotoAdapter.OnItemClickListener() {
+        adapter = new PhotoAdapter(this, new PhotoAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View photoView, PixabayResponse.Hit item) {
                 final Intent launchIntent = DetailActivity.getLaunchIntent(MainActivity.this, item);
@@ -71,6 +68,11 @@ public class MainActivity extends AppCompatActivity implements Callback<PixabayR
             }
         });
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onResponse(Call<PixabayResponse> call, Response<PixabayResponse> response) {
+        adapter.setItems(response.body().getHits());
     }
 
     @Override

@@ -43,6 +43,21 @@ public class DetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_ITEM = "EXTRA_ITEM";
 
+    @SuppressWarnings("deprecation")
+    public static Spanned fromHtml(String source) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return Html.fromHtml(source, Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            return Html.fromHtml(source);
+        }
+    }
+
+    public static Intent getLaunchIntent(Context context, PixabayResponse.Hit item) {
+        final Intent intent = new Intent(context, DetailActivity.class);
+        intent.putExtra(EXTRA_ITEM, item);
+        return intent;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +75,8 @@ public class DetailActivity extends AppCompatActivity {
         Glide
                 .with(this)
                 .load(item.getWebformatURL().replace("640", "340"))
-                .override(width, height)
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .dontAnimate()
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
@@ -91,20 +107,5 @@ public class DetailActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-    }
-
-    @SuppressWarnings("deprecation")
-    public static Spanned fromHtml(String source) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            return Html.fromHtml(source, Html.FROM_HTML_MODE_LEGACY);
-        } else {
-            return Html.fromHtml(source);
-        }
-    }
-
-    public static Intent getLaunchIntent(Context context, PixabayResponse.Hit item){
-        final Intent intent = new Intent(context, DetailActivity.class);
-        intent.putExtra(EXTRA_ITEM, item);
-        return intent;
     }
 }

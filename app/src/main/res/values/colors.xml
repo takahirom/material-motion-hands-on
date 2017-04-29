@@ -19,4 +19,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <array name="loading_placeholders_light">
+        <item>#fff5f5f5</item>
+        <item>#ffeeeeee</item>
+        <item>#ffe0e0e0</item>
+    </array>
 </resources>
