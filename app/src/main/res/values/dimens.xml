@@ -22,5 +22,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
 
+    <dimen name="margin_16dp">16dp</dimen>
+
     <dimen name="touch_raise">6dp</dimen>
 </resources>

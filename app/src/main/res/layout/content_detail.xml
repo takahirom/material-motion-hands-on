@@ -24,11 +24,8 @@
     tools:context="com.github.takahirom.motion_app.DetailActivity"
     tools:showIn="@layout/activity_detail">
 
-    <TextView
-        android:id="@+id/detail_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:text="@string/large_text" />
-
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_photo_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 </android.support.v4.widget.NestedScrollView>
