@@ -21,6 +21,6 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
     <style name="AppTheme.NoActionBar.Detail">
-        <item name="android:windowEnterTransition">@android:transition/move</item>
+        <item name="android:windowSharedElementEnterTransition">@transition/photo_transition</item>
     </style>
 </resources>
