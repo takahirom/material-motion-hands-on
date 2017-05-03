@@ -18,8 +18,6 @@ package com.github.takahirom.motion_app;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -63,8 +61,7 @@ public class MainActivity extends AppCompatActivity implements Callback<PixabayR
             @Override
             public void onItemClick(View photoView, PixabayResponse.Hit item) {
                 final Intent launchIntent = DetailActivity.getLaunchIntent(MainActivity.this, item);
-                final ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, photoView, getString(R.string.transition_name_photo));
-                ActivityCompat.startActivity(MainActivity.this, launchIntent, optionsCompat.toBundle());
+                MainActivity.this.startActivity(launchIntent);
             }
         });
         recyclerView.setAdapter(adapter);
