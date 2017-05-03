@@ -35,7 +35,7 @@ class PhotoDetailAdapter extends RecyclerView.Adapter<PhotoDetailAdapter.PhotoDe
     PhotoDetailAdapter() {
     }
 
-    public void setPhotoDetails(PixabayResponse.Hit photoDetail) {
+    void setPhotoDetails(PixabayResponse.Hit photoDetail) {
         this.photoDetails.add(new Item(R.drawable.ic_person_black_24dp, photoDetail.getUser()));
         this.photoDetails.add(new Item(R.drawable.ic_label_black_24dp, photoDetail.getTags()));
         this.photoDetails.add(new Item(R.drawable.ic_file_download_black_24dp, String.valueOf(photoDetail.getDownloads())));
