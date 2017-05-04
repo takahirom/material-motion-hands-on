@@ -16,11 +16,16 @@
 
 <resources>
 
-    <style name="AppTheme.NoActionBar" parent="Base.AppTheme.NoActionBar">
+    <style name="AppTheme.Main">
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar.Detail">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
-    </style>
-    <style name="AppTheme.NoActionBar.Detail">
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentNavigation">true</item>
         <item name="android:windowSharedElementEnterTransition">@transition/photo_transition</item>
     </style>
 </resources>
