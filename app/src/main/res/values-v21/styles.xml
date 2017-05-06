@@ -16,9 +16,11 @@
 
 <resources>
 
-    <style name="AppTheme.Main">
+    <style name="AppTheme.NoActionBar.Main">
         <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 
     <style name="AppTheme.NoActionBar.Detail">

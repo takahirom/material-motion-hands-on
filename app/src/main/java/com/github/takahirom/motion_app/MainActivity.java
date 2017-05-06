@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.github.takahirom.motion_app.datasource.PixabayResponse;
@@ -49,6 +50,10 @@ public class MainActivity extends AppCompatActivity implements Callback<PixabayR
     }
 
     private void setupViews() {
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         final FlexboxLayoutManager layoutManager = new FlexboxLayoutManager();

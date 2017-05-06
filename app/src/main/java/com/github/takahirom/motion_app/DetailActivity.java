@@ -87,6 +87,9 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void setupViews() {
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         final ImageView imageView = (ImageView) findViewById(R.id.photo);
         Glide
                 .with(this)
@@ -95,8 +98,6 @@ public class DetailActivity extends AppCompatActivity {
                 .dontAnimate()
                 .into(imageView);
 
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         collapsingToolbarLayout.setTitleEnabled(false);

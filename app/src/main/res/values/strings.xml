@@ -16,6 +16,7 @@
 
 <resources>
     <string name="app_name">motion-app</string>
+    <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_detail">DetailActivity</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
