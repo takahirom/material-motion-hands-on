@@ -29,9 +29,9 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.NoActionBar.Main"></style>
+    <style name="AppTheme.NoActionBar.Main" />
 
-    <style name="AppTheme.NoActionBar.Detail"></style>
+    <style name="AppTheme.NoActionBar.Detail" />
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
