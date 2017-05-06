@@ -91,6 +91,9 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void setupViews() {
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         // Stop transition for waiting image load
         ActivityCompat.postponeEnterTransition(this);
         final ImageView imageView = (ImageView) findViewById(R.id.photo);
@@ -112,8 +115,6 @@ public class DetailActivity extends AppCompatActivity {
                 })
                 .into(imageView);
 
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         collapsingToolbarLayout.setTitleEnabled(false);

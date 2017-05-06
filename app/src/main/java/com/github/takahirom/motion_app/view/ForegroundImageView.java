@@ -25,6 +25,7 @@ import android.view.ViewOutlineProvider;
 import android.widget.ImageView;
 
 import com.github.takahirom.motion_app.R;
+import com.github.takahirom.motion_app.util.AndroidVersionUtil;
 
 
 /**
@@ -44,7 +45,9 @@ public class ForegroundImageView extends ImageView {
             setForeground(d);
         }
         a.recycle();
-        setOutlineProvider(ViewOutlineProvider.BOUNDS);
+        if (AndroidVersionUtil.isGreaterThanL()) {
+            setOutlineProvider(ViewOutlineProvider.BOUNDS);
+        }
     }
 
     @Override
