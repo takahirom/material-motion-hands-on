@@ -76,12 +76,14 @@ class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(final PhotoAdapter.ViewHolder holder, final int position) {
         final PhotoItem item = photoItems.get(position);
+
         // For flexbox
         final float imageScale = activity.getResources().getDisplayMetrics().density / 3;
         final int width = (int) (item.hitPhoto.getWebformatWidth() * imageScale);
         final int height = (int) (item.hitPhoto.getWebformatHeight() * imageScale);
         holder.photoImageView.getLayoutParams().width = width;
         holder.photoImageView.getLayoutParams().height = height;
+
 
         ViewCompat.setBackground(holder.photoImageView, loadingPlaceholders[position % loadingPlaceholders.length]);
         Glide

@@ -18,9 +18,11 @@
     android:duration="375">
     <transition
         class="com.github.takahirom.motion_app.animation.transition.AsymmetricTransform"
-        android:interpolator="@android:interpolator/fast_out_slow_in" />
+        android:interpolator="@android:interpolator/fast_out_slow_in">
+        <pathMotion class="com.github.takahirom.motion_app.animation.transition.GravityArcMotion" />
+    </transition>
+
     <changeTransform android:interpolator="@android:interpolator/fast_out_slow_in" />
     <changeClipBounds android:interpolator="@android:interpolator/fast_out_slow_in" />
     <changeImageTransform android:interpolator="@android:interpolator/fast_out_slow_in" />
-    <pathMotion class="com.github.takahirom.motion_app.animation.transition.GravityArcMotion" />
 </transitionSet>

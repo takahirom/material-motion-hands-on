@@ -93,6 +93,8 @@ public class DetailActivity extends AppCompatActivity {
     private void setupViews() {
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbarLayout.setTitleEnabled(false);
 
         // Stop transition for waiting image load
         ActivityCompat.postponeEnterTransition(this);
@@ -114,10 +116,6 @@ public class DetailActivity extends AppCompatActivity {
                     }
                 })
                 .into(imageView);
-
-
-        final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbarLayout.setTitleEnabled(false);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view_photo_detail);
         recyclerView.setHasFixedSize(true);
