@@ -21,12 +21,11 @@
         class="com.github.takahirom.motion_app.animation.transition.LiftOff"
         android:duration="250"
         android:interpolator="@android:interpolator/fast_out_slow_in"
-        app:finalElevation="8dp"
-        app:initialElevation="0dp" />
+        app:finalElevation="0dp"
+        app:initialElevation="@dimen/touch_raise" >
+    </transition>
 
-    <changeBounds android:interpolator="@android:interpolator/fast_out_slow_in">
-        <pathMotion class="com.github.takahirom.motion_app.animation.transition.GravityArcMotion" />
-    </changeBounds>
+    <changeBounds android:interpolator="@android:interpolator/fast_out_slow_in" />
     <changeTransform android:interpolator="@android:interpolator/fast_out_slow_in" />
     <changeClipBounds android:interpolator="@android:interpolator/fast_out_slow_in" />
     <changeImageTransform android:interpolator="@android:interpolator/fast_out_slow_in" />

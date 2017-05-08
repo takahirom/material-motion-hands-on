@@ -20,12 +20,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.transition.TransitionManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.transition.Transition;
+import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 
@@ -36,6 +39,8 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.github.takahirom.motion_app.datasource.PixabayResponse;
 import com.github.takahirom.motion_app.util.AndroidVersionUtil;
+
+import static android.view.View.GONE;
 
 public class DetailActivity extends AppCompatActivity {
 
