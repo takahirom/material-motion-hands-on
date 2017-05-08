@@ -42,6 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
+                android:background="@android:color/white"
                 android:contentDescription="detail image"
                 android:fitsSystemWindows="true"
                 android:transitionName="@string/transition_name_photo"
