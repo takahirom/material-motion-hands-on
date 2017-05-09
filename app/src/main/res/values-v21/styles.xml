@@ -29,4 +29,13 @@
         <item name="android:windowSharedElementEnterTransition">@transition/photo_transition</item>
         <item name="android:windowSharedElementExitTransition">@transition/photo_transition</item>
     </style>
+
+    <style name="AppTheme.NoActionBar.ContentDetail">
+        <item name="android:windowSharedElementEnterTransition">
+            @transition/navigational_transition_share_enter
+        </item>
+        <item name="android:windowSharedElementExitTransition">
+            @transition/navigational_transition_share_exit
+        </item>
+    </style>
 </resources>

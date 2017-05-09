@@ -38,6 +38,11 @@
             android:name=".DetailActivity"
             android:label="@string/title_activity_detail"
             android:theme="@style/AppTheme.NoActionBar.Detail" />
+
+        <activity
+            android:name=".ContentDetailActivity"
+            android:label="@string/title_activity_content_detail"
+            android:theme="@style/AppTheme.NoActionBar.ContentDetail" />
     </application>
 
 </manifest>

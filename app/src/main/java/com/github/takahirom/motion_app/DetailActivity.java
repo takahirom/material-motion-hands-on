@@ -21,11 +21,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 
@@ -120,7 +122,15 @@ public class DetailActivity extends AppCompatActivity {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view_photo_detail);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        PhotoDetailAdapter adapter = new PhotoDetailAdapter();
+        PhotoDetailAdapter adapter = new PhotoDetailAdapter(new PhotoDetailAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View textView, PhotoDetailAdapter.Item item) {
+                final Intent launchIntent = ContentDetailActivity.getLaunchIntent(DetailActivity.this, item);
+                final ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(DetailActivity.this, textView, getString(R.string.transition_name_contents));
+                ActivityCompat.startActivity(DetailActivity.this, launchIntent, optionsCompat.toBundle());
+            }
+        });
+
         recyclerView.setAdapter(adapter);
         adapter.setPhotoDetails(photoDetail);
 

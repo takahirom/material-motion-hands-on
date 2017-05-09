@@ -18,6 +18,7 @@
     <string name="app_name">motion-app</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_detail">DetailActivity</string>
+    <string name="title_activity_content_detail">ContentDetailActivity</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
@@ -109,4 +110,6 @@
     </string>
     <string name="action_settings">Settings</string>
     <string name="transition_name_photo">photo</string>
+    <string name="transition_name_contents">contents</string>
+
 </resources>
