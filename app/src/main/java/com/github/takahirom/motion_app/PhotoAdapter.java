@@ -88,18 +88,18 @@ class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> {
         ViewCompat.setBackground(holder.photoImageView, loadingPlaceholders[position % loadingPlaceholders.length]);
         Glide
                 .with(activity)
-                .load(item.hitPhoto.getWebformatURL().replace("640", "340"))
+                .load(R.mipmap.ic_launcher)
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .listener(new RequestListener<String, GlideDrawable>() {
+                .listener(new RequestListener<Integer, GlideDrawable>() {
 
                     @Override
-                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                    public boolean onException(Exception e, Integer model, Target<GlideDrawable> target, boolean isFirstResource) {
                         return false;
                     }
 
                     @Override
                     public boolean onResourceReady(GlideDrawable resource,
-                                                   String model,
+                                                   Integer model,
                                                    Target<GlideDrawable> target,
                                                    boolean isFromMemoryCache,
                                                    boolean isFirstResource) {

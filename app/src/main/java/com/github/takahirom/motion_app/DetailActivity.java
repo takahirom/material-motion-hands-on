@@ -101,16 +101,16 @@ public class DetailActivity extends AppCompatActivity {
         final ImageView imageView = (ImageView) findViewById(R.id.photo);
         Glide
                 .with(this)
-                .load(photoDetail.getWebformatURL().replace("640", "340"))
+                .load(R.mipmap.ic_launcher)
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .dontAnimate()
-                .listener(new RequestListener<String, GlideDrawable>() {
+                .listener(new RequestListener<Integer, GlideDrawable>() {
                     @Override
-                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                    public boolean onException(Exception e, Integer model, Target<GlideDrawable> target, boolean isFirstResource) {
                         return false;
                     }
                     @Override
-                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                    public boolean onResourceReady(GlideDrawable resource, Integer model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
                         ActivityCompat.startPostponedEnterTransition(DetailActivity.this);
                         return false;
                     }
